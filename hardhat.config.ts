@@ -9,6 +9,11 @@ require('dotenv').config();
 const config: HardhatUserConfig = {
   defaultNetwork: 'hardhat',
   networks: {
+    mainnet: {
+      url: 'https://mainnet.infura.io/v3/' + process.env.INFURA_TOKEN,
+      accounts: [process.env.PRIVATE_KEY as string],
+      gasPrice: 45 * 1000000000,
+    },
     rinkeby: {
       url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_TOKEN,
       accounts: [process.env.DEV_PRIVATE_KEY as string],
