@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts/Liquidity.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> Liquidity.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>47/47</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>14/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>9/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>48/48</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
+pragma solidity 0.8.4;
+&nbsp;
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./interfaces/IUniswapV2Router.sol";
+import "./interfaces/IUniswapV2Pair.sol";
+import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+import "./OwnedInitializable.sol";
+import "./interfaces/IWETH.sol";
+&nbsp;
+struct Deposit {
+    uint256 balance;
+    uint256 withdrawnBalance;
+    uint48 timestamp;
+    bool locked;
+}
+&nbsp;
+contract Liquidity is OwnedInitializable, ReentrancyGuardUpgradeable {
+    IUniswapV2Router private constant router = IUniswapV2Router(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
+    IUniswapV2Pair public uniswapPair;
+    IERC20 public token;
+    address private _WETH;
+    address private _token0;
+    address private _token1;
+&nbsp;
+    mapping(address =&gt; uint256) public nonces;
+    mapping(address =&gt; mapping(uint256 =&gt; Deposit)) public deposits;
+&nbsp;
+    uint256 public lockPeriod;
+    uint256 public vestingPeriod;
+&nbsp;
+    event ProvidedLiquidity(address indexed user, bool indexed locked, uint256 tokenId, uint256 amountLiquidity);
+    event Withdraw(address indexed user, bool indexed locked, uint256 tokenId, uint256 amountLiquidity);
+    event LockPeriodUpdated(uint256 oldValue, uint256 newValue);
+    event VestingPeriodUpdated(uint256 oldValue, uint256 newValue);
+&nbsp;
+    function initialize(address _token, address _uniswapPair) public initializer {
+        __Ownable_init();
+        __ReentrancyGuard_init();
+        token = IERC20(_token);
+        uniswapPair = IUniswapV2Pair(_uniswapPair);
+        _WETH = router.WETH();
+        (_token0, _token1) = (_WETH &lt; _token ? (_WETH, _token) : (_token, _WETH));
+        lockPeriod = 26 weeks;
+        vestingPeriod = lockPeriod * 2;
+    }
+&nbsp;
+    /// @notice provides liquidity with uniswap
+    /// @dev    ETH half is provided by user, token half is provided by the smart contract
+    /// @dev    each deposit is stored with new id
+    /// @param  _lock if true, lock total token amount for `lockPeriod` amount of time, else linearly vest amount for `vestingPeriod` amount of time
+    function provideLiquidity(bool _lock) external payable nonReentrant {
+        uint256 amountETH = msg.value;
+        uint256 nonce = nonces[_msgSender()];
+        nonces[_msgSender()]++;
+        uint256 liquidityMinted = _provideLiquidity(amountETH);
+        Deposit memory newDeposit = Deposit({
+            balance: liquidityMinted,
+            withdrawnBalance: 0,
+            timestamp: uint48(block.timestamp),
+            locked: _lock
+        });
+        deposits[_msgSender()][nonce] = newDeposit;
+        emit ProvidedLiquidity(_msgSender(), _lock, nonce, liquidityMinted);
+    }
+&nbsp;
+    /// @notice allows to withdraw unlocked tokens
+    /// @dev    for locked tokens allows full withdrawal after lock period is over
+    /// @dev    for vested tokens allows to withdraw partial unlocked amount
+    /// @param  _id deposit id to withdraw
+    function withdraw(uint256 _id) external nonReentrant {
+        Deposit storage deposit = deposits[_msgSender()][_id];
+        require(nonces[_msgSender()] &gt; _id, "Liquidity: No deposit found for provided id");
+        uint256 tokensToWithdraw = _withdrawableBalance(deposit);
+        require(tokensToWithdraw &gt; 0, "Liquidity: No unlocked tokens to withdraw for provided id");
+        deposit.withdrawnBalance += tokensToWithdraw;
+        uniswapPair.transfer(_msgSender(), tokensToWithdraw);
+        emit Withdraw(_msgSender(), deposit.locked, _id, tokensToWithdraw);
+    }
+&nbsp;
+    /// @notice sets new duration of lock period
+    /// @dev only callable by owner
+    /// @param _newPeriod new period duration in seconds
+    function setLockPeriod(uint256 _newPeriod) external onlyOwner {
+        emit LockPeriodUpdated(lockPeriod, _newPeriod);
+        lockPeriod = _newPeriod;
+    }
+&nbsp;
+    /// @notice sets new duration of vesting period
+    /// @dev only callable by owner
+    /// @param _newPeriod new period duration in seconds
+    function setVestingPeriod(uint256 _newPeriod) external onlyOwner {
+        emit VestingPeriodUpdated(vestingPeriod, _newPeriod);
+        vestingPeriod = _newPeriod;
+    }
+&nbsp;
+    /// @dev returns deposited balance for a specific account and token id
+    function depositedBalance(address _account, uint256 _id) external view returns (uint256) {
+        if (_id &gt;= nonces[_account]) {
+            return 0;
+        }
+        return deposits[_account][_id].balance;
+    }
+&nbsp;
+    /// @dev returns withdrawable balance for a specific account and token id
+    function withdrawableBalance(address _account, uint256 _id) external view returns (uint256) {
+        Deposit storage deposit = deposits[_account][_id];
+        return _withdrawableBalance(deposit);
+    }
+&nbsp;
+    function _provideLiquidity(uint256 _amountETH) private returns (uint256 liquidityMinted) {
+        require(_amountETH &gt; 0, "Liquidity: No ETH provided");
+        (uint256 reserve0, uint256 reserve1, ) = uniswapPair.getReserves();
+        assert(reserve0 &gt; 0 &amp;&amp; reserve1 &gt; 0);
+        (uint256 reserveA, uint256 reserveB) = address(token) == _token0 ? (reserve0, reserve1) : (reserve1, reserve0);
+        uint256 amountToken = (_amountETH * (reserveA)) / reserveB;
+        require(amountToken &lt;= token.balanceOf(address(this)), "Liquidity: Insufficient token amount in contract");
+        token.transfer(address(uniswapPair), amountToken);
+        IWETH weth = IWETH(_WETH);
+        weth.deposit{value: _amountETH}();
+        assert(weth.transfer(address(uniswapPair), _amountETH));
+        liquidityMinted = uniswapPair.mint(address(this));
+    }
+&nbsp;
+    function _withdrawableBalance(Deposit memory _deposit) private view returns (uint256) {
+        if (_deposit.locked) {
+            return
+                _deposit.timestamp + lockPeriod &lt;= block.timestamp ? _deposit.balance - _deposit.withdrawnBalance : 0;
+        } else {
+            uint256 amountTokensLocked = 0;
+            if (_deposit.timestamp + vestingPeriod &gt; block.timestamp) {
+                amountTokensLocked =
+                    _deposit.balance -
+                    ((_deposit.balance * (block.timestamp - _deposit.timestamp)) / vestingPeriod);
+            }
+            return _deposit.balance - amountTokensLocked - _deposit.withdrawnBalance;
+        }
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Aug 21 2021 02:50:02 GMT+0200 (Central European Summer Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
