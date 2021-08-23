@@ -3,6 +3,7 @@ import 'solidity-coverage';
 import 'hardhat-gas-reporter';
 import '@typechain/hardhat';
 import '@openzeppelin/hardhat-upgrades';
+import '@nomiclabs/hardhat-etherscan';
 import { HardhatUserConfig, task } from 'hardhat/config';
 require('dotenv').config();
 
@@ -41,6 +42,9 @@ const config: HardhatUserConfig = {
     currency: 'USD',
     gasPrice: 50,
     enabled: process.env.REPORT_GAS === 'true',
+  },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_TOKEN,
   },
 };
 
