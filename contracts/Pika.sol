@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity 0.8.4;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol";
@@ -12,7 +12,6 @@ contract Pika is OwnedInitializable, ERC20PermitUpgradeable {
     bool public feesEnabled;
     bool public swapEnabled;
 
-    IUniswapV2Router private constant router = IUniswapV2Router(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
     address public uniswapPair;
 
     // combine recipient and fee into a single storage slot
@@ -44,7 +43,7 @@ contract Pika is OwnedInitializable, ERC20PermitUpgradeable {
         string calldata _name,
         string calldata _symbol,
         uint256 _initial_fee
-    ) public initializer {
+    ) public virtual initializer {
         __Ownable_init();
         __ERC20_init(_name, _symbol);
         __ERC20Permit_init(_name);
@@ -52,8 +51,8 @@ contract Pika is OwnedInitializable, ERC20PermitUpgradeable {
         _mint(_msgSender(), _totalSupply);
 
         // calculate future Uniswap V2 pair address
-        address uniswapFactory = router.factory();
-        address _WETH = router.WETH();
+        address uniswapFactory = router().factory();
+        address _WETH = router().WETH();
         WETH = _WETH;
         // calculate future uniswap pair address
         (address token0, address token1) = (_WETH < address(this) ? (_WETH, address(this)) : (address(this), _WETH));
@@ -202,6 +201,10 @@ contract Pika is OwnedInitializable, ERC20PermitUpgradeable {
         swapEnabled = _enabled;
     }
 
+    function router() public pure virtual returns (IUniswapV2Router) {
+        return IUniswapV2Router(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
+    }
+
     function _transfer(
         address sender,
         address recipient,
@@ -212,7 +215,7 @@ contract Pika is OwnedInitializable, ERC20PermitUpgradeable {
             isExcludedFromFee[sender] ||
             isExcludedFromFee[recipient] ||
             // when removing liquidity from uniswap, don't take fee multiple times
-            (sender == uniswapPair && recipient == address(router))
+            (sender == uniswapPair && recipient == address(router()))
         ) {
             super._transfer(sender, recipient, amount);
             return;
@@ -244,7 +247,7 @@ contract Pika is OwnedInitializable, ERC20PermitUpgradeable {
             amountWithFee -= liquidityFee;
         }
         // don't autoswap when uniswap pair or router are sending tokens
-        if (swapEnabled && sender != uniswapPair && sender != address(router)) {
+        if (swapEnabled && sender != uniswapPair && sender != address(router())) {
             _swapTokensForEth();
         }
         super._transfer(sender, recipient, amountWithFee);
@@ -256,9 +259,9 @@ contract Pika is OwnedInitializable, ERC20PermitUpgradeable {
         path[1] = WETH;
 
         uint256 tokenAmount = balanceOf(address(this));
-        _approve(address(this), address(router), tokenAmount);
+        _approve(address(this), address(router()), tokenAmount);
         (address to, ) = unpackBeneficiary(beneficiary);
-        router.swapExactTokensForETHSupportingFeeOnTransferTokens(tokenAmount, 0, path, to, block.timestamp);
+        router().swapExactTokensForETHSupportingFeeOnTransferTokens(tokenAmount, 0, path, to, block.timestamp);
     }
 
     function _calculateFee(uint256 _amount, uint256 _fee) private pure returns (uint256) {

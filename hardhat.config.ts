@@ -19,6 +19,20 @@ const config: HardhatUserConfig = {
       url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_TOKEN,
       accounts: [process.env.DEV_PRIVATE_KEY as string],
     },
+    goerli: {
+      url: 'https://goerli.infura.io/v3/' + process.env.INFURA_TOKEN,
+      accounts: [process.env.DEV_PRIVATE_KEY as string],
+    },
+    mumbai: {
+      url: 'https://polygon-mumbai.infura.io/v3/' + process.env.INFURA_TOKEN,
+      accounts: [process.env.DEV_PRIVATE_KEY as string],
+      gasPrice: 8000000000,
+    },
+    polygon: {
+      url: 'https://polygon-mainnet.infura.io/v3/' + process.env.INFURA_TOKEN,
+      accounts: [process.env.PRIVATE_KEY as string],
+      gasPrice: 20000000000,
+    },
     hardhat: {
       forking: {
         url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_TOKEN,
