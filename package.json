@@ -6,7 +6,8 @@
   "scripts": {
     "compile": "npx hardhat compile && npx hardhat typechain",
     "test": "npx hardhat test",
-    "prettier": "prettier --write 'contracts/**/*.sol'"
+    "prettier": "prettier --write 'contracts/**/*.sol'",
+    "typechain": "typechain --target ethers-v5 --out-dir artifacts/typechain"
   },
   "repository": {
     "type": "git",
