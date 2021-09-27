@@ -8,7 +8,7 @@ import { ContractTransaction } from '@ethersproject/contracts';
 describe('Pika', () => {
   let pika: Pika;
   let accounts: SignerWithAddress[];
-  const uniswapRouter = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D';
+  let uniswapRouter: string;
   const unix2100 = '4102441200';
   let owner: string;
 
@@ -24,6 +24,7 @@ describe('Pika', () => {
       'PIKA',
       '275',
     ])) as Pika;
+    uniswapRouter = await pika.router();
   });
 
   describe('Setup tests', async () => {

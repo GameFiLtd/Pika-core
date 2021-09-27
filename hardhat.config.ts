@@ -3,6 +3,7 @@ import 'solidity-coverage';
 import 'hardhat-gas-reporter';
 import '@typechain/hardhat';
 import '@openzeppelin/hardhat-upgrades';
+import '@nomiclabs/hardhat-etherscan';
 import { HardhatUserConfig, task } from 'hardhat/config';
 require('dotenv').config();
 
@@ -17,6 +18,20 @@ const config: HardhatUserConfig = {
     rinkeby: {
       url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_TOKEN,
       accounts: [process.env.DEV_PRIVATE_KEY as string],
+    },
+    goerli: {
+      url: 'https://goerli.infura.io/v3/' + process.env.INFURA_TOKEN,
+      accounts: [process.env.DEV_PRIVATE_KEY as string],
+    },
+    mumbai: {
+      url: 'https://polygon-mumbai.infura.io/v3/' + process.env.INFURA_TOKEN,
+      accounts: [process.env.DEV_PRIVATE_KEY as string],
+      gasPrice: 8000000000,
+    },
+    polygon: {
+      url: 'https://polygon-mainnet.infura.io/v3/' + process.env.INFURA_TOKEN,
+      accounts: [process.env.PRIVATE_KEY as string],
+      gasPrice: 20000000000,
     },
     hardhat: {
       forking: {
@@ -41,6 +56,9 @@ const config: HardhatUserConfig = {
     currency: 'USD',
     gasPrice: 50,
     enabled: process.env.REPORT_GAS === 'true',
+  },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_TOKEN,
   },
 };
 
