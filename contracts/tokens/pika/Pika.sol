@@ -2,8 +2,8 @@
 pragma solidity 0.8.4;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol";
-import "./OwnedInitializable.sol";
-import "./interfaces/IUniswapV2Router.sol";
+import "../../OwnedInitializable.sol";
+import "../../interfaces/IUniswapV2Router.sol";
 
 contract Pika is OwnedInitializable, ERC20PermitUpgradeable {
     address public WETH;

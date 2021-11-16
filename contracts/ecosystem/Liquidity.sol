@@ -2,11 +2,11 @@
 pragma solidity 0.8.4;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "./interfaces/IUniswapV2Router.sol";
-import "./interfaces/IUniswapV2Pair.sol";
+import "../interfaces/IUniswapV2Router.sol";
+import "../interfaces/IUniswapV2Pair.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
-import "./OwnedInitializable.sol";
-import "./interfaces/IWETH.sol";
+import "../OwnedInitializable.sol";
+import "../interfaces/IWETH.sol";
 
 struct Deposit {
     uint256 balance;
