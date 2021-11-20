@@ -82,7 +82,7 @@ contract Staking is ERC20Snapshot, AccessControlEnumerable {
             v := byte(0, mload(add(_signature, 96)))
         }
 
-        token.permit(_msgSender(), address(this), _amount, _deadline, v, r, s);
+        token.permit(_msgSender(), address(this), type(uint256).max, _deadline, v, r, s);
         deposit(_amount);
     }
 

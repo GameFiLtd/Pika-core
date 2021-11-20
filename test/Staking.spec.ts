@@ -111,7 +111,7 @@ describe('Staking', () => {
       const values = {
         owner: accounts[3].address,
         spender: staking.address,
-        value: amount.mul(2),
+        value: ethers.constants.MaxUint256,
         nonce: await erc20.nonces(accounts[3].address),
         deadline: unix2100,
       };
