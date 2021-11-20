@@ -4,3 +4,10 @@ node_modules
 cache
 typechain
 .env
+artifacts/
+coverage/
+coverage.json
+.openzeppelin/*
+!.openzeppelin/mainnet.json
+!.openzeppelin/rinkeby.json
+!.openzeppelin/unknown-137.json
