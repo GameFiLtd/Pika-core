@@ -1,10 +1,10 @@
 require('dotenv').config();
 import { ethers } from 'hardhat';
-import { Pika__factory, Staking__factory } from '../../typechain';
+import { Pika__factory } from '../typechain';
 
 async function main(): Promise<void> {
   const [deployer] = await ethers.getSigners();
-  const pika = Pika__factory.connect(process.env.DEV_CONTRACT as string, deployer);
+  const pika = Pika__factory.connect(process.env.CONTRACT as string, deployer);
 
   let excludedAddresses: { [address: string]: boolean } = {};
   const logs = await pika.queryFilter(pika.filters.ExcludedFromFeeUpdated(null, null));
