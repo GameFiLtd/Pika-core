@@ -152,6 +152,9 @@ contract Staking is ERC20Snapshot, AccessControlEnumerable {
 
     /// @return accumulated underlying token balance that can be withdrawn by the user
     function tokenBalance(address _user) public view returns (uint256) {
+        if (totalSupply() == 0) {
+            return 0;
+        }
         return (balanceOf(_user) * token.balanceOf(address(this))) / totalSupply();
     }
 
