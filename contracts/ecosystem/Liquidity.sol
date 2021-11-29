@@ -104,7 +104,7 @@ contract Liquidity is OwnedInitializable, ReentrancyGuardUpgradeable {
 
     /// @dev returns withdrawable balance for a specific account and token id
     function withdrawableBalance(address _account, uint256 _id) external view returns (uint256) {
-        Deposit storage deposit = deposits[_account][_id];
+        Deposit memory deposit = deposits[_account][_id];
         return _withdrawableBalance(deposit);
     }
 
