@@ -92,6 +92,7 @@ contract Base is OwnedInitializable, ERC20PermitUpgradeable {
      * @dev helper function to pack address and fee into one storage slot
      */
     function packBeneficiary(address _beneficiary, uint256 _fee) public pure virtual returns (uint256) {
+        require(_fee <= 10000, "INVALID_FEE");
         uint256 storedBeneficiary = uint256(uint160(_beneficiary));
         storedBeneficiary |= _fee << 160;
         return storedBeneficiary;
