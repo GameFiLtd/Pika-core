@@ -231,6 +231,7 @@ contract Base is OwnedInitializable, ERC20PermitUpgradeable {
             transferFee = handleFeeTransfer(sender, amount, beneficiaryAddress, transferFee);
         }
         uint256 amountWithFee = amount - transferFee;
+        require(amountWithFee > 0);
         // burn tokens if min supply not reached yet
         uint256 burnedFee = _calculateFee(amount, 25);
         if (totalSupply() - burnedFee >= minSupply) {
