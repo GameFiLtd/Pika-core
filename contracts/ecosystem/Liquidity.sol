@@ -74,7 +74,7 @@ contract Liquidity is OwnedInitializable, ReentrancyGuardUpgradeable {
         uint256 tokensToWithdraw = _withdrawableBalance(deposit);
         require(tokensToWithdraw > 0, "Liquidity: No unlocked tokens to withdraw for provided id");
         deposit.withdrawnBalance += tokensToWithdraw;
-        uniswapPair.transfer(_msgSender(), tokensToWithdraw);
+        assert(uniswapPair.transfer(_msgSender(), tokensToWithdraw));
         emit Withdraw(_msgSender(), deposit.locked, _id, tokensToWithdraw);
     }
 
@@ -115,7 +115,7 @@ contract Liquidity is OwnedInitializable, ReentrancyGuardUpgradeable {
         (uint256 reserveA, uint256 reserveB) = address(token) == _token0 ? (reserve0, reserve1) : (reserve1, reserve0);
         uint256 amountToken = (_amountETH * (reserveA)) / reserveB;
         require(amountToken <= token.balanceOf(address(this)), "Liquidity: Insufficient token amount in contract");
-        token.transfer(address(uniswapPair), amountToken);
+        assert(token.transfer(address(uniswapPair), amountToken));
         IWETH weth = IWETH(_WETH);
         weth.deposit{value: _amountETH}();
         assert(weth.transfer(address(uniswapPair), _amountETH));
