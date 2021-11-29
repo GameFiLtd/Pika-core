@@ -139,6 +139,7 @@ contract Base is OwnedInitializable, ERC20PermitUpgradeable {
     {
         setExcludeFromFee(_newBeneficiary, true);
         (address currentBeneficiary, uint256 currentFee) = unpackBeneficiary(beneficiary);
+        setExcludeFromFee(currentBeneficiary, false);
         uint256 newBeneficiary = packBeneficiary(_newBeneficiary, _fee);
         emit BeneficiaryRewardUpdated(currentBeneficiary, _newBeneficiary, currentFee, _fee);
         beneficiary = newBeneficiary;
@@ -159,6 +160,7 @@ contract Base is OwnedInitializable, ERC20PermitUpgradeable {
     {
         setExcludeFromFee(_contractAddress, true);
         (address currentAddress, uint256 currentFee) = unpackBeneficiary(staking);
+        setExcludeFromFee(currentAddress, false);
         uint256 newStaking = packBeneficiary(_contractAddress, _fee);
         emit StakingRewardUpdated(currentAddress, _contractAddress, currentFee, _fee);
         staking = newStaking;
@@ -179,6 +181,7 @@ contract Base is OwnedInitializable, ERC20PermitUpgradeable {
     {
         setExcludeFromFee(_contractAddress, true);
         (address currentAddress, uint256 currentFee) = unpackBeneficiary(liquidity);
+        setExcludeFromFee(currentAddress, false);
         uint256 newLiquidity = packBeneficiary(_contractAddress, _fee);
         emit LiquidityRewardUpdated(currentAddress, _contractAddress, currentFee, _fee);
         liquidity = newLiquidity;
