@@ -1,14 +1,24 @@
 require('dotenv').config();
-import { ethers, upgrades } from 'hardhat';
-import { Pika, Pika__factory } from '../../typechain';
+import { ethers, network, upgrades } from 'hardhat';
 
-const contractName = 'Pika';
+let contractName: string;
+let contractAddress: string;
+
+if (network.name === 'mainnet') {
+  contractName = 'Pika';
+  contractAddress = process.env.CONTRACT as string;
+} else if (network.name === 'polygon') {
+  contractName = 'PikaPolygon';
+  contractAddress = process.env.CONTRACT_POLYGON as string;
+} else {
+  throw new Error('Unsupported network');
+}
 
 async function main(contractName: string): Promise<void> {
   const [deployer] = await ethers.getSigners();
   console.log('Upgrading contract with the account:', deployer.address);
-  const Contract = (await ethers.getContractFactory(contractName)) as Pika__factory;
-  const contract = (await upgrades.upgradeProxy(process.env.CONTRACT as string, Contract)) as Pika;
+  const Contract = await ethers.getContractFactory(contractName);
+  const contract = await upgrades.upgradeProxy(contractAddress, Contract);
   console.log('Contract address:', contract.address);
 }
 
