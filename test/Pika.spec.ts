@@ -4,10 +4,9 @@ import { ContractTransaction } from '@ethersproject/contracts';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { expect } from 'chai';
 import { ethers, upgrades } from 'hardhat';
-import { IERC20, IERC20__factory, IUniswapV2Router, IUniswapV2Router__factory, Pika, PikaLegacy } from '../typechain';
+import { IERC20, IERC20__factory, IUniswapV2Router, IUniswapV2Router__factory, Pika } from '../typechain';
 
 describe('Pika', () => {
-  let pikaLegacy: PikaLegacy;
   let pika: Pika;
   let uniswap: IUniswapV2Router;
   let accounts: SignerWithAddress[];
@@ -18,22 +17,22 @@ describe('Pika', () => {
   before(async () => {
     accounts = await ethers.getSigners();
     owner = accounts[0].address;
-    const factory = await ethers.getContractFactory('PikaLegacy');
-    pikaLegacy = (await upgrades.deployProxy(factory, [
+    const factory = await ethers.getContractFactory('Pika');
+    pika = (await upgrades.deployProxy(factory, [
       ethers.utils.parseEther('10000000000000'),
       ethers.utils.parseEther('50000000000000'),
       accounts[1].address,
       'PIKA',
       'PIKA',
       '500',
-    ])) as PikaLegacy;
-    uniswapRouter = await pikaLegacy.router();
-    await pikaLegacy.setFeesEnabled(true);
-    await pikaLegacy.setSwapEnabled(true);
-    await pikaLegacy.approve(uniswapRouter, ethers.constants.MaxUint256);
+    ])) as Pika;
+    uniswapRouter = await pika.router();
+    await pika.setFeesEnabled(true);
+    await pika.setSwapEnabled(true);
+    await pika.approve(uniswapRouter, ethers.constants.MaxUint256);
     uniswap = IUniswapV2Router__factory.connect(uniswapRouter, accounts[0]);
     await uniswap.addLiquidityETH(
-      pikaLegacy.address,
+      pika.address,
       ethers.utils.parseEther('10000000'),
       ethers.utils.parseEther('10000000'),
       ethers.utils.parseEther('20'),
@@ -41,11 +40,6 @@ describe('Pika', () => {
       unix2100,
       { value: ethers.utils.parseEther('20') }
     );
-  });
-
-  it('should be safe to upgrade contract', async () => {
-    const factory = await ethers.getContractFactory('Pika');
-    pika = (await upgrades.upgradeProxy(pikaLegacy.address, factory)) as Pika;
   });
 
   describe('Uniswap tests & transfer tests', async () => {

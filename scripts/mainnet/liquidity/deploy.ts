@@ -1,29 +1,34 @@
 require('dotenv').config();
 import { ethers, upgrades } from 'hardhat';
-import { Pika, Pika__factory } from '../../../typechain';
+import { Liquidity, Liquidity__factory, Metra__factory } from '../../../typechain';
 
 const contractName = 'Liquidity';
-const constructorParams: any[] = [process.env.CONTRACT, process.env.PAIR];
 
-async function main(contractName: string, constructorParams?: any[]): Promise<void> {
+async function main(contractName: string): Promise<void> {
   const [deployer] = await ethers.getSigners();
   console.log('Deploying contract with the account:', deployer.address);
-  const Contract = (await ethers.getContractFactory(contractName)) as Pika__factory;
-  const contract = (await upgrades.deployProxy(Contract, constructorParams!)) as Pika;
+  const metra = Metra__factory.connect(process.env.METRA as string, deployer);
+  const constructorParams: any[] = [metra.address, await metra.uniswapPair()];
+
+  const factory = (await ethers.getContractFactory(contractName)) as Liquidity__factory;
+  const contract = (await upgrades.deployProxy(factory, constructorParams!)) as Liquidity;
   await contract.deployed();
   console.log('Contract address:', contract.address);
 
-  const pika = Pika__factory.connect(process.env.CONTRACT as string, deployer);
-
-  let tx = await pika.setBeneficiary(process.env.BENEFICIARY as string, '175');
-  console.log('Setting beneficiary fee to 1.75%', tx.hash);
+  let tx = await metra.setLiquidity(contract.address, '500');
+  console.log('Setting liquidity fee to 5%', tx.hash);
   await tx.wait();
-  tx = await pika.setLiquidity(contract.address, '100');
-  console.log('Setting liquidity fee to 1%', tx.hash);
+
+  tx = await metra.setFeesEnabled(true);
+  console.log('Enabling fees', tx.hash);
+  await tx.wait();
+
+  tx = await metra.setSwapEnabled(true);
+  console.log('Enabling swaps', tx.hash);
   await tx.wait();
 }
 
-main(contractName, constructorParams)
+main(contractName)
   .then(() => process.exit(0))
   .catch((err) => {
     console.error(err);

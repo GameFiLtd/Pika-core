@@ -34,10 +34,11 @@ const config: HardhatUserConfig = {
     },
     hardhat: {
       forking: {
-        url: 'https://rinkeby.infura.io/v3/' + process.env.INFURA_TOKEN,
+        url: 'https://mainnet.infura.io/v3/' + process.env.INFURA_TOKEN,
       },
       hardfork: 'berlin',
       gasPrice: 0,
+      chainId: 1,
     },
   },
   solidity: {
